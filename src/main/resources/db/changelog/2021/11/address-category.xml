@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="1637604414047-4" author="xtreme">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="address_category"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="address_category">
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_address_category"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_address_category"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="address_category"
+                                 constraintName="fk_addcat_on_address"
+                                 referencedColumnNames="id" referencedTableName="address"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="address_category"
+                                 constraintName="fk_addcat_on_category"
+                                 referencedColumnNames="id" referencedTableName="category"/>
+
+        <rollback>
+            <dropTable tableName="address_category"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="1637604414047-5" author="xtreme (generated)">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="image"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="image">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_image"/>
+            </column>
+            <column name="position" type="INT"/>
+            <column name="address_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="image"
+                                 constraintName="FK_IMAGE_ON_ADDRESS"
+                                 referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+
+</databaseChangeLog>
