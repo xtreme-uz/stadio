@@ -36,10 +36,10 @@ public class CategoryResource {
         return ContentWrapper.wrap(result);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{slug}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
-        service.deleteCategory(id);
+    public void delete(@PathVariable String slug) {
+        service.deleteCategory(slug);
     }
 
 }

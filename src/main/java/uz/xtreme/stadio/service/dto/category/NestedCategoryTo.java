@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class NestedCategoryTo {
-    private Long id;
     private String slug;
     private String name;
     private List<NestedCategoryTo> categories;

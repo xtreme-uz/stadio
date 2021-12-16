@@ -24,13 +24,13 @@ public class Address extends Pk {
     @OneToMany
     @OrderBy("position")
     @JoinColumn(name = "address_id")
-    private List<Image> images;
+    private List<Image> images = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "address_category",
             joinColumns = @JoinColumn(name = "address_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
-            indexes = @Index(name = "product_product_id_category_id_idx", columnList = "address_id, category_id"))
+            inverseJoinColumns = @JoinColumn(name = "category_slug", referencedColumnName = "slug"),
+            indexes = @Index(name = "product_product_id_category_slug_idx", columnList = "address_id, category_slug"))
     private List<Category> categories = new ArrayList<>();
 
     @Override

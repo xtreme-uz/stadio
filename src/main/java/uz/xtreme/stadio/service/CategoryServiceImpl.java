@@ -28,8 +28,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(long id) {
-        repository.deleteById(id);
+    public void deleteCategory(String slug) {
+        repository.deleteById(slug);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getById(long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Category not found by id"));
+    public Category getBySlug(String slug) {
+        return repository.findById(slug).orElseThrow(() -> new RuntimeException("Category not found by id"));
     }
 
 }

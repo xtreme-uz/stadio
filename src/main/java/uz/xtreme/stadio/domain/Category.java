@@ -11,15 +11,17 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "category", uniqueConstraints = {
-        @UniqueConstraint(name = "category_table_slug_unique", columnNames = "slug")
-})
-public class Category extends Pk {
-    @Column(name = "slug") private String slug;
-    @Column(name = "name") private String name;
+@Table(name = "category")
+public class Category {
+    @Id
+    @Column(name = "slug")
+    private String slug;
+
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "parent_slug")
     private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
@@ -31,11 +33,11 @@ public class Category extends Pk {
         if (o == null || ProxyUtils.getUserClass(this) != ProxyUtils.getUserClass(o))
             return false;
         Category category = (Category) o;
-        return getId() != null && Objects.equals(getId(), category.getId());
+        return getSlug() != null && Objects.equals(getSlug(), category.getSlug());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getSlug());
     }
 }

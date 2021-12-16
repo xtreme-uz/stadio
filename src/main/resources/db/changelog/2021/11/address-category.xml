@@ -17,7 +17,7 @@
             <column name="address_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_address_category"/>
             </column>
-            <column name="category_id" type="BIGINT">
+            <column name="category_slug" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_address_category"/>
             </column>
         </createTable>
@@ -26,9 +26,14 @@
                                  constraintName="fk_addcat_on_address"
                                  referencedColumnNames="id" referencedTableName="address"/>
 
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="address_category"
+        <addForeignKeyConstraint baseColumnNames="category_slug" baseTableName="address_category"
                                  constraintName="fk_addcat_on_category"
-                                 referencedColumnNames="id" referencedTableName="category"/>
+                                 referencedColumnNames="slug" referencedTableName="category"/>
+
+        <createIndex tableName="address_category" indexName="product_product_id_category_slug_idx">
+            <column name="address_id"/>
+            <column name="category_slug"/>
+        </createIndex>
 
         <rollback>
             <dropTable tableName="address_category"/>

@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 public class CategoryTo {
-    @JsonProperty("id") private Long id;
     @JsonProperty("slug") private String slug;
     @JsonProperty("name") private String name;
     @JsonProperty("parent") private CategoryTo parent;

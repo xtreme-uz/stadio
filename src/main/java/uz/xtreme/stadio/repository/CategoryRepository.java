@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, String> {
     boolean existsBySlug(String slug);
 
     List<Category> findByParentIsNull();

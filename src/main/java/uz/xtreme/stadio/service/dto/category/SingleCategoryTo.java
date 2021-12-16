@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 public class SingleCategoryTo {
-    @JsonProperty("id") private Long id;
     @JsonProperty("slug") private String slug;
     @JsonProperty("name") private String name;
-    @JsonProperty("parent_id") private Long parentId;
+    @JsonProperty("parent_slug") private String parentSlug;
 }

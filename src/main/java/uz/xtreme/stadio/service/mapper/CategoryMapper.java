@@ -26,8 +26,8 @@ public class CategoryMapper {
         if (dto.getName() != null)
             category.setName(dto.getName());
 
-        if (dto.getParentId() != null)
-            category.setParent(asCategory(dto.getParentId()));
+        if (dto.getParentSlug() != null)
+            category.setParent(asCategory(dto.getParentSlug()));
 
         return category;
     }
@@ -38,7 +38,6 @@ public class CategoryMapper {
 
         var dto = new CategoryTo();
 
-        dto.setId(category.getId());
         dto.setSlug(category.getSlug());
         dto.setName(category.getName());
         dto.setParent(asDto(category.getParent()));
@@ -54,13 +53,13 @@ public class CategoryMapper {
         return categories.stream().map(this::asDto).collect(Collectors.toList());
     }
 
-    public Category asCategory(Long id) {
-        if (id == null)
+    public Category asCategory(String slug) {
+        if (slug == null)
             return null;
 
         var category = new Category();
 
-        category.setId(id);
+        category.setSlug(slug);
 
         return category;
     }
@@ -71,7 +70,6 @@ public class CategoryMapper {
 
         var result = new NestedCategoryTo();
 
-        result.setId(category.getId());
         result.setSlug(category.getSlug());
         result.setName(category.getName());
         result.setCategories(asNestedCategory(category.getCategories()));
@@ -92,11 +90,10 @@ public class CategoryMapper {
 
         var result = new SingleCategoryTo();
 
-        result.setId(category.getId());
         result.setSlug(category.getSlug());
         result.setName(category.getName());
         if (category.getParent() != null)
-            result.setParentId(category.getParent().getId());
+            result.setParentSlug(category.getParent().getSlug());
 
         return result;
     }

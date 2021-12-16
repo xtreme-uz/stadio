@@ -1,11 +1,13 @@
 package uz.xtreme.stadio.service.mapper;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import uz.xtreme.stadio.domain.Address;
 import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.service.dto.address.AddressCreate;
 import uz.xtreme.stadio.service.dto.address.AddressTo;
+import uz.xtreme.stadio.service.dto.address.AddressUpdate;
 
 import java.util.List;
 
@@ -51,4 +53,33 @@ public class AddressMapper {
         return result;
     }
 
+    public Page<AddressTo> asDto(Page<Address> addresses) {
+        if (addresses == null)
+            return null;
+
+        return addresses.map(this::asDto);
+    }
+
+    public void merge(AddressUpdate dto, List<Category> categories, Address address) {
+        if (dto == null || address == null)
+            return;
+
+        if (dto.getRegion() != null)
+            address.setRegion(dto.getRegion());
+
+        if (dto.getStreet() != null)
+            address.setStreet(dto.getStreet());
+
+        if (dto.getZipCode() != null)
+            address.setZipCode(dto.getZipCode());
+
+        if (dto.getLat() != null)
+            address.setLat(dto.getLat());
+
+        if (dto.getLon() != null)
+            address.setLon(dto.getLon());
+
+        if (categories != null)
+            address.setCategories(categories);
+    }
 }
