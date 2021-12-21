@@ -1,6 +1,8 @@
 package uz.xtreme.stadio.service.error;
 
 import lombok.Getter;
+import uz.xtreme.stadio.core.error.Error;
+import uz.xtreme.stadio.core.error.ErrorType;
 
 @Getter
 public final class CategoryNotFoundByIdError extends Error {

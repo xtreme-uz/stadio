@@ -1,6 +1,6 @@
-package uz.xtreme.stadio.service.error;
+package uz.xtreme.stadio.core.error;
 
-enum ErrorType {
+public enum ErrorType {
     NOT_FOUND,
     DUPLICATE,
     UNKNOWN,

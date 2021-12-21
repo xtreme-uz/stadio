@@ -1,4 +1,4 @@
-package uz.xtreme.stadio.domain;
+package uz.xtreme.stadio.core.model;
 
 import lombok.Getter;
 import lombok.Setter;

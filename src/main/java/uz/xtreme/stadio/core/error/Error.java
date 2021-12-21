@@ -1,4 +1,4 @@
-package uz.xtreme.stadio.service.error;
+package uz.xtreme.stadio.core.error;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

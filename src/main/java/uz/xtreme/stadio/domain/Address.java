@@ -2,8 +2,10 @@ package uz.xtreme.stadio.domain;
 
 import lombok.*;
 import org.springframework.data.util.ProxyUtils;
+import uz.xtreme.stadio.core.model.Pk;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +20,8 @@ public class Address extends Pk {
     @Column(name = "region") private String region;
     @Column(name = "street") private String street;
     @Column(name = "zip_code") private String zipCode;
-    @Column(name = "lat") private String lat;
-    @Column(name = "lon") private String lon;
+    @Column(name = "lat") private BigDecimal lat;
+    @Column(name = "lng") private BigDecimal lng;
 
     @OneToMany
     @OrderBy("position")

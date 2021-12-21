@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import uz.xtreme.stadio.domain.Address;
 import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.repository.AddressRepository;
 import uz.xtreme.stadio.service.dto.address.AddressCreate;
 import uz.xtreme.stadio.service.dto.address.AddressUpdate;
 import uz.xtreme.stadio.service.mapper.AddressMapper;
+import uz.xtreme.stadio.service.validator.AddressValidation;
 import uz.xtreme.stadio.utils.CategoryUtils;
 
 import java.util.List;
@@ -22,11 +22,13 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository repository;
     private final CategoryService categoryService;
     private final AddressMapper mapper;
+    private final AddressValidation validation;
 
     @Override
     public Address create(AddressCreate dto) {
+        validation.validateOnCreate(dto);
+
         Category category = categoryService.getBySlug(dto.getCategorySlug());
-        validateLeafCategory(category);
         //TODO validate images count
 
         //TODO add images
@@ -37,11 +39,11 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address update(long id, AddressUpdate dto) {
+        validation.validateOnUpdate(id, dto);
         List<Category> categories = null;
 
         if (dto.getCategorySlug() != null) {
             Category category = categoryService.getBySlug(dto.getCategorySlug());
-            validateLeafCategory(category);
             categories = CategoryUtils.extractParents(category);
         }
 
@@ -62,11 +64,6 @@ public class AddressServiceImpl implements AddressService {
 
     public Address get(long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Address not found by id: " + id));
-    }
-
-    private void validateLeafCategory(Category category) {
-        if (!CollectionUtils.isEmpty(category.getCategories()))
-            throw new RuntimeException("Category is not leaf");
     }
 
 }

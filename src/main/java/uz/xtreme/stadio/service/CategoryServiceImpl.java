@@ -6,6 +6,7 @@ import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.repository.CategoryRepository;
 import uz.xtreme.stadio.service.dto.category.CategoryCreate;
 import uz.xtreme.stadio.service.mapper.CategoryMapper;
+import uz.xtreme.stadio.service.validator.CategoryValidation;
 
 import java.util.List;
 
@@ -15,15 +16,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository repository;
     private final CategoryMapper mapper;
+    private final CategoryValidation validation;
 
     @Override
     public Category createCategory(CategoryCreate dto) {
-        if (repository.existsBySlug(dto.getSlug())) {
-            throw new RuntimeException("Slug unique constraint");
-        }
+        validation.validateOnCreate(dto);
 
         Category category = mapper.asCategory(dto);
-
         return repository.save(category);
     }
 
@@ -39,7 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getBySlug(String slug) {
-        return repository.findById(slug).orElseThrow(() -> new RuntimeException("Category not found by id"));
+        return repository.findById(slug)
+                .orElseThrow(() -> new RuntimeException("Category not found by id"));
     }
 
 }

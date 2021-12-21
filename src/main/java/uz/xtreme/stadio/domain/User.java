@@ -1,5 +1,7 @@
 package uz.xtreme.stadio.domain;
 
+import uz.xtreme.stadio.core.model.Pk;
+
 import javax.persistence.*;
 
 @Entity

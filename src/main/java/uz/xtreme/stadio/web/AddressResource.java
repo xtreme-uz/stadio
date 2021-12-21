@@ -30,7 +30,7 @@ public class AddressResource {
     }
 
     @PatchMapping("/{id}")
-    public AddressTo update(@PathVariable long id, @RequestBody AddressUpdate dto) {
+    public AddressTo update(@PathVariable long id, @Valid @RequestBody AddressUpdate dto) {
         Address address = service.update(id, dto);
         return mapper.asDto(address);
     }

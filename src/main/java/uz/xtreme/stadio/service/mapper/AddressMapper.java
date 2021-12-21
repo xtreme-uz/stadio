@@ -28,7 +28,7 @@ public class AddressMapper {
         result.setStreet(dto.getStreet());
         result.setZipCode(dto.getZipCode());
         result.setLat(dto.getLat());
-        result.setLon(dto.getLon());
+        result.setLng(dto.getLng());
 
         result.setCategories(categories);
 
@@ -46,7 +46,7 @@ public class AddressMapper {
         result.setStreet(address.getStreet());
         result.setZipCode(address.getZipCode());
         result.setLat(address.getLat());
-        result.setLon(address.getLon());
+        result.setLng(address.getLng());
         result.setImages(imageMapper.asDto(address.getImages()));
         result.setCategories(categoryMapper.asSingleCategory(address.getCategories()));
 
@@ -76,8 +76,8 @@ public class AddressMapper {
         if (dto.getLat() != null)
             address.setLat(dto.getLat());
 
-        if (dto.getLon() != null)
-            address.setLon(dto.getLon());
+        if (dto.getLng() != null)
+            address.setLng(dto.getLng());
 
         if (categories != null)
             address.setCategories(categories);

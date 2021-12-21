@@ -1,6 +1,7 @@
 package uz.xtreme.stadio.service.mapper;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.service.dto.category.CategoryCreate;
 import uz.xtreme.stadio.service.dto.category.CategoryTo;
@@ -47,7 +48,7 @@ public class CategoryMapper {
     }
 
     public List<CategoryTo> asDto(List<Category> categories) {
-        if (categories == null)
+        if (CollectionUtils.isEmpty(categories))
             return Collections.emptyList();
 
         return categories.stream().map(this::asDto).collect(Collectors.toList());
