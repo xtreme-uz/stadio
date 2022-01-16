@@ -29,6 +29,7 @@ public class AddressMapper {
         result.setZipCode(dto.getZipCode());
         result.setLat(dto.getLat());
         result.setLng(dto.getLng());
+        result.setImages(imageMapper.fromIds(dto.getImageIds()));
 
         result.setCategories(categories);
 

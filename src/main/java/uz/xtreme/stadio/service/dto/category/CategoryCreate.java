@@ -1,13 +1,22 @@
 package uz.xtreme.stadio.service.dto.category;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Value;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
-@Data
+@Value
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CategoryCreate {
-    @NotNull @JsonProperty("slug") private String slug;
-    @NotNull @JsonProperty("name") private String name;
-    @JsonProperty("parent_slug") private String parentSlug;
+
+    @NotNull
+    @Length(min = 3, max = 20)
+    String slug;
+
+    @NotNull
+    String name;
+
+    String parentSlug;
 }

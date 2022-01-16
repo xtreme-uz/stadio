@@ -12,6 +12,6 @@ public abstract class Validator {
 
     public void verifyNext() {
         if (this.next != null)
-            this.next.verifyNext();
+            this.next.verify();
     }
 }

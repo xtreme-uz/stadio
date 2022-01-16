@@ -35,11 +35,11 @@
 }
 ```
 
-| Attribute     |  Type  | Nullable | Description |
-|---------------|:------:|:--------:|-------------|
-| `slug`        | string |    ❌     | max: 255    |
-| `name`        | string |    ❌     | max: 255    |
-| `parent_slug` | string |    ✅     | max: 255    |
+| Attribute     |  Type  | Nullable | Unique | Description                             |
+|---------------|:------:|:--------:|--------|-----------------------------------------|
+| `slug`        | string |    ❌     | ✅      | white space is invalid, min: 3, max: 20 |
+| `name`        | string |    ❌     | ❌      | max: 255                                |
+| `parent_slug` | string |    ✅     | ❌      | max: 255                                |
 
 ### Response Headers
 
@@ -53,11 +53,25 @@
 {
   "slug": "football_station",
   "name": "Football Station",
-  "parent": null,
+  "parent": {
+    "slug": "station",
+    "name": "Station",
+    "parent_slug": null
+  },
   "categories": []
 }
 ```
 
+### 🌟🌟🌟 Delete Category `DELETE: [/api/categories/{slug}]`
+
+
+### Path variables
+
+- `slug` - slug of exist category
+
+### Response
+
+- Response status `204 NO_CONTENT` 🍽
 ---
 
 ## Address Resources
@@ -87,18 +101,20 @@
   "zip_code": "100024",
   "lat": 12.34321,
   "lng": 12.33212,
-  "category_slug": "football_station"
+  "category_slug": "football_station",
+  "image_ids": ["d5c07925-0fd7-465e-b8dd-08c434d76a4c", "bf1bcb70-49c8-4895-8194-f6a35ed43f44"]
 }
 ```
 
-| Attribute       |     Type      | Nullable | Description | 
-|:----------------|:-------------:|:--------:|-------------|
-| `region`        |    string     |    ✅     | max: 255    |
-| `street`        |    string     |    ✅     | max: 255    |
-| `zip_code`      |    string     |    ✅     | max: 255    |
-| `lat`           | decimal(10,8) |    ✅     |             |
-| `lon`           | decimal(11,8) |    ✅     |             |
-| `category_slug` |     long      |    ❌     | max: 255    | 
+| Attribute       |     Type      | Nullable | Description               | 
+|:----------------|:-------------:|:--------:|---------------------------|
+| `region`        |    string     |    ✅     | max: 255                  |
+| `street`        |    string     |    ✅     | max: 255                  |
+| `zip_code`      |    string     |    ✅     | max: 255                  |
+| `lat`           | decimal(10,8) |    ✅     |                           |
+| `lon`           | decimal(11,8) |    ✅     |                           |
+| `category_slug` |    string     |    ❌     | min: 3, max: 20           | 
+| `image_ids`     |     array     |    ✅     | validated by max property |
 
 ### Response Headers
 
@@ -115,9 +131,26 @@
   "street": "Mirzo Ulug'bek",
   "zip_code": "100024",
   "lat": 12.34321,
-  "lon": 12.33212,
-  "images": [],
-  "categories": []
+  "lng": null,
+  "images": [
+    {
+      "id": "bf1bcb70-49c8-4895-8194-f6a35ed43f44",
+      "position": null,
+      "link": "bf1bcb70-49c8-4895-8194-f6a35ed43f44.null"
+    }
+  ],
+  "categories": [
+    {
+      "slug": "football_station",
+      "name": "Football Stadion",
+      "parent_slug": "station"
+    },
+    {
+      "slug": "station",
+      "name": "Stadion",
+      "parent_slug": null
+    }
+  ]
 }
 ```
 
@@ -142,7 +175,7 @@
     "zip_code": "100025",
     "lat": 42.243253,
     "lng": 42.243253,
-    "category_slug": "tashkent"
+    "category_slug": "football_station"
 }
 ```
 

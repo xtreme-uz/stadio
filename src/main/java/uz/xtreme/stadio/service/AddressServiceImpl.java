@@ -29,17 +29,16 @@ public class AddressServiceImpl implements AddressService {
         validation.validateOnCreate(dto);
 
         Category category = categoryService.getBySlug(dto.getCategorySlug());
-        //TODO validate images count
-
-        //TODO add images
         List<Category> categories = CategoryUtils.extractParents(category);
         Address address = mapper.asAddress(dto, categories);
+
         return repository.save(address);
     }
 
     @Override
     public Address update(long id, AddressUpdate dto) {
         validation.validateOnUpdate(id, dto);
+
         List<Category> categories = null;
 
         if (dto.getCategorySlug() != null) {
@@ -63,7 +62,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     public Address get(long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Address not found by id: " + id));
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Address not found by id: " + id));
     }
 
 }

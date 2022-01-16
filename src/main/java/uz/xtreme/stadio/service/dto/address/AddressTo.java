@@ -15,7 +15,7 @@ public class AddressTo {
     @JsonProperty("street") private String street;
     @JsonProperty("zip_code") private String zipCode;
     @JsonProperty("lat") private BigDecimal lat;
-    @JsonProperty("lon") private BigDecimal lng;
+    @JsonProperty("lng") private BigDecimal lng;
     @JsonProperty("images") private List<ImageTo> images;
     @JsonProperty("categories") private List<SingleCategoryTo> categories;
 }

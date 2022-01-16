@@ -41,8 +41,8 @@ public class CategoryMapper {
 
         dto.setSlug(category.getSlug());
         dto.setName(category.getName());
-        dto.setParent(asDto(category.getParent()));
-        dto.setCategories(asDto(category.getCategories()));
+        dto.setParent(asSingleCategory(category.getParent()));
+        dto.setCategories(asSingleCategory(category.getCategories()));
 
         return dto;
     }

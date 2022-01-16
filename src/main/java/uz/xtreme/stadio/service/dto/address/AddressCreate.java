@@ -1,34 +1,35 @@
 package uz.xtreme.stadio.service.dto.address;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Value;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
-@Data
+@Value
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AddressCreate {
     @Length(max = 255)
-    @JsonProperty("region")
-    private String region;
+    String region;
 
     @Length(max = 255)
-    @JsonProperty("street")
-    private String street;
+    String street;
 
     @Length(max = 255)
-    @JsonProperty("zip_code")
-    private String zipCode;
+    String zipCode;
 
-    @JsonProperty("lat")
-    private BigDecimal lat;
+    BigDecimal lat;
 
-    @JsonProperty("lng")
-    private BigDecimal lng;
+    BigDecimal lng;
 
     @NotNull
-    @Length(max = 255)
-    @JsonProperty("category_slug")
-    private String categorySlug;
+    @Length(min = 3, max = 20)
+    String categorySlug;
+
+    Set<UUID> imageIds = new HashSet<>();
 }
