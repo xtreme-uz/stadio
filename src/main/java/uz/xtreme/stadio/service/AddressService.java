@@ -1,10 +1,11 @@
 package uz.xtreme.stadio.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import uz.xtreme.stadio.domain.Address;
+import uz.xtreme.stadio.repository.projection.AddressPoint;
 import uz.xtreme.stadio.service.dto.address.AddressCreate;
 import uz.xtreme.stadio.service.dto.address.AddressUpdate;
+
+import java.util.List;
 
 public interface AddressService {
     Address create(AddressCreate dto);
@@ -13,5 +14,7 @@ public interface AddressService {
 
     void delete(long id);
 
-    Page<Address> getAll(Pageable pageable);
+    List<AddressPoint> getAllAddressPoints();
+
+    Address getAddressById(long id);
 }

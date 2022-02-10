@@ -56,11 +56,13 @@ public class CategoryValidation implements Validation {
 
         @Override
         public void verify() {
-            var category = repository.findById(categorySlug)
-                    .orElseThrow(() -> new RuntimeException("Category not found by id"));
+            if (categorySlug != null) {
+                var category = repository.findById(categorySlug)
+                        .orElseThrow(() -> new RuntimeException("Category not found by id"));
 
-            if (!CollectionUtils.isEmpty(category.getCategories()))
-                throw new RuntimeException("Category is not leaf");
+                if (!CollectionUtils.isEmpty(category.getCategories()))
+                    throw new RuntimeException("Category is not leaf");
+            }
 
             verifyNext();
         }

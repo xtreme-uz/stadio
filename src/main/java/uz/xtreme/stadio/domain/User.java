@@ -10,6 +10,7 @@ import javax.persistence.*;
 })
 public class User extends Pk {
     @Column(name = "username", nullable = false) private String username;
+    @Column(name = "password", nullable = false) private String password;
     @Column(name = "phone_number") private String phoneNumber;
     @Column(name = "email") private String email;
     @Column(name = "first_name") private String firstName;

@@ -1,108 +1,31 @@
 package uz.xtreme.stadio.service.mapper;
 
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.service.dto.category.CategoryCreate;
 import uz.xtreme.stadio.service.dto.category.CategoryTo;
 import uz.xtreme.stadio.service.dto.category.NestedCategoryTo;
 import uz.xtreme.stadio.service.dto.category.SingleCategoryTo;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class CategoryMapper {
+@Mapper(componentModel = "spring")
+public interface CategoryMapper {
 
-    public Category asCategory(CategoryCreate dto) {
-        if (dto == null)
-            return null;
+    Category asCategory(CategoryCreate dto);
 
-        var category = new Category();
+    @Mapping(target = "parent", expression = "java(asSingleCategory(category.getParent()))")
+    @Mapping(target = "categories", expression = "java(asSingleCategory(category.getCategories()))")
+    CategoryTo asDto(Category category);
 
-        if (dto.getSlug() != null)
-            category.setSlug(dto.getSlug());
+    @Mapping(target = "categories", expression = "java(asNestedCategory(category.getCategories()))")
+    NestedCategoryTo asNestedCategory(Category category);
 
-        if (dto.getName() != null)
-            category.setName(dto.getName());
+    List<NestedCategoryTo> asNestedCategory(List<Category> categories);
 
-        if (dto.getParentSlug() != null)
-            category.setParent(asCategory(dto.getParentSlug()));
+    @Mapping(target = "parentSlug", source = "parent.slug")
+    SingleCategoryTo asSingleCategory(Category category);
 
-        return category;
-    }
-
-    public CategoryTo asDto(Category category) {
-        if (category == null)
-            return null;
-
-        var dto = new CategoryTo();
-
-        dto.setSlug(category.getSlug());
-        dto.setName(category.getName());
-        dto.setParent(asSingleCategory(category.getParent()));
-        dto.setCategories(asSingleCategory(category.getCategories()));
-
-        return dto;
-    }
-
-    public List<CategoryTo> asDto(List<Category> categories) {
-        if (CollectionUtils.isEmpty(categories))
-            return Collections.emptyList();
-
-        return categories.stream().map(this::asDto).collect(Collectors.toList());
-    }
-
-    public Category asCategory(String slug) {
-        if (slug == null)
-            return null;
-
-        var category = new Category();
-
-        category.setSlug(slug);
-
-        return category;
-    }
-
-    public NestedCategoryTo asNestedCategory(Category category) {
-        if (category == null)
-            return null;
-
-        var result = new NestedCategoryTo();
-
-        result.setSlug(category.getSlug());
-        result.setName(category.getName());
-        result.setCategories(asNestedCategory(category.getCategories()));
-
-        return result;
-    }
-
-    public List<NestedCategoryTo> asNestedCategory(List<Category> tree) {
-        if (tree == null)
-            return Collections.emptyList();
-
-        return tree.stream().map(this::asNestedCategory).collect(Collectors.toList());
-    }
-
-    public SingleCategoryTo asSingleCategory(Category category) {
-        if (category == null)
-            return null;
-
-        var result = new SingleCategoryTo();
-
-        result.setSlug(category.getSlug());
-        result.setName(category.getName());
-        if (category.getParent() != null)
-            result.setParentSlug(category.getParent().getSlug());
-
-        return result;
-    }
-
-    public List<SingleCategoryTo> asSingleCategory(List<Category> category) {
-        if (category == null)
-            return Collections.emptyList();
-
-        return category.stream().map(this::asSingleCategory).collect(Collectors.toList());
-    }
+    List<SingleCategoryTo> asSingleCategory(List<Category> category);
 }

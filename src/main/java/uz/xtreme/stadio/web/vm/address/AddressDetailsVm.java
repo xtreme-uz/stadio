@@ -1,28 +1,21 @@
-package uz.xtreme.stadio.service.dto.address;
+package uz.xtreme.stadio.web.vm.address;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Value;
-import org.hibernate.validator.constraints.Length;
+import uz.xtreme.stadio.web.vm.image.ImageVm;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Value
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class AddressUpdate {
-    @Length(max = 255)
+public class AddressDetailsVm {
+    Long id;
     String region;
-
-    @Length(max = 255)
     String street;
-
-    @Length(max = 255)
     String zipCode;
-
     BigDecimal lat;
-
     BigDecimal lng;
-
-    @Length(min = 3, max = 20)
-    String categorySlug;
+    List<ImageVm> images;
 }
