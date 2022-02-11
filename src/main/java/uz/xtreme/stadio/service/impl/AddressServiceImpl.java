@@ -32,7 +32,7 @@ public class AddressServiceImpl implements AddressService {
     public Address create(AddressCreate dto) {
         validation.validateOnCreate(dto);
 
-        User user = userRepository.getById(1L);
+        User user = userRepository.findByUsername("admin").orElse(null);
         Category category = categoryRepository.getById(dto.getCategorySlug());
         List<Category> categories = CategoryUtils.extractParents(category);
         Address address = mapper.asAddress(dto, user, categories);
