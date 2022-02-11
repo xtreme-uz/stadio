@@ -1,1 +1,1 @@
-web: java -jar target/stadio-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/stadio-0.0.1-SNAPSHOT.jar
