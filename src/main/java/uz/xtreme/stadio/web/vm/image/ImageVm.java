@@ -1,4 +1,4 @@
-package uz.xtreme.stadio.service.dto.image;
+package uz.xtreme.stadio.web.vm.image;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Value
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ImageTo {
+public class ImageVm {
     UUID id;
     Integer position;
     String link;

@@ -1,12 +1,15 @@
-package uz.xtreme.stadio.service;
+package uz.xtreme.stadio.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.xtreme.stadio.domain.Address;
 import uz.xtreme.stadio.domain.Category;
+import uz.xtreme.stadio.domain.User;
 import uz.xtreme.stadio.repository.AddressRepository;
+import uz.xtreme.stadio.repository.CategoryRepository;
+import uz.xtreme.stadio.repository.UserRepository;
+import uz.xtreme.stadio.repository.projection.AddressPoint;
+import uz.xtreme.stadio.service.AddressService;
 import uz.xtreme.stadio.service.dto.address.AddressCreate;
 import uz.xtreme.stadio.service.dto.address.AddressUpdate;
 import uz.xtreme.stadio.service.mapper.AddressMapper;
@@ -20,7 +23,8 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository repository;
-    private final CategoryService categoryService;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
     private final AddressMapper mapper;
     private final AddressValidation validation;
 
@@ -28,9 +32,10 @@ public class AddressServiceImpl implements AddressService {
     public Address create(AddressCreate dto) {
         validation.validateOnCreate(dto);
 
-        Category category = categoryService.getBySlug(dto.getCategorySlug());
+        User user = userRepository.getById(1L);
+        Category category = categoryRepository.getById(dto.getCategorySlug());
         List<Category> categories = CategoryUtils.extractParents(category);
-        Address address = mapper.asAddress(dto, categories);
+        Address address = mapper.asAddress(dto, user, categories);
 
         return repository.save(address);
     }
@@ -42,11 +47,11 @@ public class AddressServiceImpl implements AddressService {
         List<Category> categories = null;
 
         if (dto.getCategorySlug() != null) {
-            Category category = categoryService.getBySlug(dto.getCategorySlug());
+            Category category = categoryRepository.getById(dto.getCategorySlug());
             categories = CategoryUtils.extractParents(category);
         }
 
-        Address address = get(id);
+        Address address = getAddressById(id);
         mapper.merge(dto, categories, address);
         return repository.save(address);
     }
@@ -57,13 +62,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Page<Address> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public List<AddressPoint> getAllAddressPoints() {
+        return repository.findAllAddressPoints();
     }
 
-    public Address get(long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Address not found by id: " + id));
+    @Override
+    public Address getAddressById(long id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Address not found by id: " + id));
     }
 
 }

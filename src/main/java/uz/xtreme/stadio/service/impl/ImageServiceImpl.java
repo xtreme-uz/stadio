@@ -1,10 +1,11 @@
-package uz.xtreme.stadio.service;
+package uz.xtreme.stadio.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.xtreme.stadio.domain.Image;
 import uz.xtreme.stadio.repository.ImageRepository;
+import uz.xtreme.stadio.service.ImageService;
 import uz.xtreme.stadio.service.mapper.ImageMapper;
 
 import java.util.List;

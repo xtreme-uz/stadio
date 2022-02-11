@@ -6,6 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
 
     <include file="db/changelog/2021/11/users.xml"/>
+    <include file="db/changelog/2021/11/user_phone_numbers.xml"/>
     <include file="db/changelog/2021/11/address.xml"/>
     <include file="db/changelog/2021/11/category.xml"/>
     <include file="db/changelog/2021/11/address-category.xml"/>

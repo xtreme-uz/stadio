@@ -2,12 +2,13 @@ package uz.xtreme.stadio.service.validator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import uz.xtreme.stadio.core.validation.Validation;
 import uz.xtreme.stadio.core.validation.Validator;
 import uz.xtreme.stadio.repository.ImageRepository;
 
 @Component
 @RequiredArgsConstructor
-public class ImageValidation {
+public class ImageValidation implements Validation {
 
     public static class AddressImageLimitValidator extends Validator {
 

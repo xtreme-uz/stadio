@@ -23,9 +23,14 @@ public class AddressCreate {
     @Length(max = 255)
     String zipCode;
 
+    @NotNull
     BigDecimal lat;
 
+    @NotNull
     BigDecimal lng;
+
+    @Length(max = 4000)
+    String description;
 
     @NotNull
     @Length(min = 3, max = 20)

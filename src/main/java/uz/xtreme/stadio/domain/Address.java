@@ -22,6 +22,11 @@ public class Address extends Pk {
     @Column(name = "zip_code") private String zipCode;
     @Column(name = "lat") private BigDecimal lat;
     @Column(name = "lng") private BigDecimal lng;
+    @Column(name = "description") private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
 
     @OneToMany
     @OrderBy("position")

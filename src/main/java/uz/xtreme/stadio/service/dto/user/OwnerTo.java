@@ -1,15 +1,13 @@
-package uz.xtreme.stadio.service.dto.image;
+package uz.xtreme.stadio.service.dto.user;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Value;
 
-import java.util.UUID;
-
 @Value
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ImageTo {
-    UUID id;
-    Integer position;
-    String link;
+public class OwnerTo {
+    String fullName;
+    
+
 }

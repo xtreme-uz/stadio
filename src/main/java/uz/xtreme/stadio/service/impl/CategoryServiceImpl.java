@@ -1,9 +1,10 @@
-package uz.xtreme.stadio.service;
+package uz.xtreme.stadio.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.xtreme.stadio.domain.Category;
 import uz.xtreme.stadio.repository.CategoryRepository;
+import uz.xtreme.stadio.service.CategoryService;
 import uz.xtreme.stadio.service.dto.category.CategoryCreate;
 import uz.xtreme.stadio.service.mapper.CategoryMapper;
 import uz.xtreme.stadio.service.validator.CategoryValidation;

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import uz.xtreme.stadio.domain.Image;
 import uz.xtreme.stadio.service.ImageService;
 import uz.xtreme.stadio.service.mapper.ImageMapper;
-import uz.xtreme.stadio.web.vm.ImageTemplateVm;
+import uz.xtreme.stadio.web.vm.image.ImageTemplateVm;
 
 @RestController
 @RequiredArgsConstructor
