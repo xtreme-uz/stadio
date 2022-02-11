@@ -25,10 +25,14 @@ public interface ImageMapper {
 
     List<ImageTo> asDto(List<Image> images);
 
+    @Mapping(target = "position", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "addressId", ignore = true)
     @Mapping(target = "id", expression = "java(UUID.randomUUID())")
     @Mapping(target = "ext", expression = "java(FilenameUtils.getExtension(filename))")
     Image asImageTemplate(String filename);
 
+    @Mapping(target = "created", ignore = true)
     @Mapping(target = "id", expression = "java(UUID.randomUUID())")
     @Mapping(target = "ext", expression = "java(FilenameUtils.getExtension(filename))")
     @Mapping(target = "position", constant = "0")
@@ -37,6 +41,10 @@ public interface ImageMapper {
     @Mapping(target = "link", expression = "java(ImageUtils.getImageLink(image))")
     ImageTemplateVm asImageTemplateVm(Image image);
 
+    @Mapping(target = "position", ignore = true)
+    @Mapping(target = "ext", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "addressId", ignore = true)
     @Mapping(target = "id", source = "uuid")
     Image fromId(UUID uuid);
 

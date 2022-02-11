@@ -13,6 +13,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
+    @Mapping(target = "parent", ignore = true)
+    @Mapping(target = "categories", ignore = true)
     Category asCategory(CategoryCreate dto);
 
     @Mapping(target = "parent", expression = "java(asSingleCategory(category.getParent()))")
