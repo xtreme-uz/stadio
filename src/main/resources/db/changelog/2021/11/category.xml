@@ -21,8 +21,8 @@
             <column name="parent_slug" type="VARCHAR(255)"/>
         </createTable>
 
-        <addForeignKeyConstraint baseColumnNames="parent_slug" baseTableName="category"
+        <addForeignKeyConstraint baseTableName="category" baseColumnNames="parent_slug"
                                  constraintName="fk_category_on_parent"
-                                 referencedColumnNames="slug" referencedTableName="category"/>
+                                 referencedTableName="category" referencedColumnNames="slug" />
     </changeSet>
 </databaseChangeLog>

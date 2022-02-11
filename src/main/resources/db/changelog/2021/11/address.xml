@@ -14,19 +14,25 @@
         </preConditions>
 
         <createTable tableName="address">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column name="id" type="BIGSERIAL">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_address"/>
             </column>
+            <column name="owner_id" type="BIGINT"/>
             <column name="region" type="VARCHAR(255)"/>
             <column name="street" type="VARCHAR(255)"/>
             <column name="zip_code" type="VARCHAR(255)"/>
             <column name="lat" type="DECIMAL(10,8)"/>
             <column name="lng" type="DECIMAL(11,8)"/>
+            <column name="description" type="TEXT"/>
         </createTable>
 
         <createIndex indexName="address_region_idx" tableName="address">
             <column name="region"/>
         </createIndex>
+
+        <addForeignKeyConstraint baseTableName="address" baseColumnNames="owner_id"
+                                 constraintName="fk_user_address_on_address"
+                                 referencedTableName="users" referencedColumnNames="id"/>
 
         <rollback>
             <dropTable tableName="address"/>

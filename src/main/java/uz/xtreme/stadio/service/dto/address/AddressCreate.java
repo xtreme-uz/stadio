@@ -29,6 +29,9 @@ public class AddressCreate {
     @NotNull
     BigDecimal lng;
 
+    @Length(max = 4000)
+    String description;
+
     @NotNull
     @Length(min = 3, max = 20)
     String categorySlug;

@@ -1,8 +1,9 @@
-package uz.xtreme.stadio.service;
+package uz.xtreme.stadio.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import uz.xtreme.stadio.service.MessageService;
 
 import java.util.Locale;
 

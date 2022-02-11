@@ -17,5 +17,7 @@ public class AddressDetailsVm {
     String zipCode;
     BigDecimal lat;
     BigDecimal lng;
+    String description;
+    OwnerVm owner;
     List<ImageVm> images;
 }

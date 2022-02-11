@@ -7,6 +7,7 @@ import uz.xtreme.stadio.domain.Image;
 import uz.xtreme.stadio.service.dto.image.ImageTo;
 import uz.xtreme.stadio.utils.ImageUtils;
 import uz.xtreme.stadio.web.vm.image.ImageTemplateVm;
+import uz.xtreme.stadio.web.vm.image.ImageVm;
 
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,9 @@ public interface ImageMapper {
 
     @Mapping(target = "link", expression = "java(ImageUtils.getImageLink(image))")
     ImageTo asDto(Image image);
+
+    @Mapping(target = "link", expression = "java(ImageUtils.getImageLink(image))")
+    ImageVm asImageVm(Image image);
 
     List<ImageTo> asDto(List<Image> images);
 
