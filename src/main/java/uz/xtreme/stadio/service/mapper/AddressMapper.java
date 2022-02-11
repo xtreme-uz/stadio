@@ -23,6 +23,9 @@ public interface AddressMapper {
 
     AddressTo asDto(Address address);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "owner", ignore = true)
+    @Mapping(target = "images", ignore = true)
     void merge(AddressUpdate dto, List<Category> categories, @MappingTarget Address address);
 
     AddressDetailsVm asAddressDetailsVm(Address address);
